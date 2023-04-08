@@ -1,0 +1,14 @@
+[package]
+name = "chat_application"
+version = "0.1.0"
+edition = "2021"
+
+[bin]
+name = "server"
+path = "server/main.rs"
+
+[bin]
+name = "client"
+path = "client/main.rs"
+
+[dependencies]
