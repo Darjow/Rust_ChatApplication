@@ -3,12 +3,12 @@ name = "chat_application"
 version = "0.1.0"
 edition = "2021"
 
-[bin]
+[[bin]]
 name = "server"
-path = "server/main.rs"
+path = "src/server/main.rs"
 
-[bin]
+[[bin]]
 name = "client"
-path = "client/main.rs"
+path = "src/client/main.rs"
 
 [dependencies]
