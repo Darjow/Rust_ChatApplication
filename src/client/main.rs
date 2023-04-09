@@ -17,25 +17,6 @@ fn main() {
         }
     });
 
-    let mut username = String::new();
-    print!("Enter your username: ");
-    std::io::stdout().flush().unwrap();
-    std::io::stdin().read_line(&mut username).unwrap();
-
-    username = username.trim().to_string();
-
-    loop {
-        if let Err(e) = stream.write(username.as_bytes()) {
-            println!("Error sending username: {}", e);
-            continue;
-        }
-        if let Err(e) = stream.write(b"\n") {
-            println!("Error sending newline: {}", e);
-            continue;
-        }
-        break;
-    }
-
     loop {
         let mut message = String::new();
         std::io::stdin().read_line(&mut message).unwrap();

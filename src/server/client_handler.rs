@@ -4,6 +4,7 @@ use std::collections::HashMap;
 use std::net::TcpStream;
 use std::sync::Arc;
 
+
 type ClientList = Arc<Mutex<HashMap<String, TcpStream>>>;
 
 pub struct ClientHandler {
@@ -17,14 +18,20 @@ impl ClientHandler {
 }
 
   pub fn get_username(&self) -> String {
-    let mut reader = BufReader::new(&self.stream);
     let mut username = String::new();
-    reader.read_line(&mut username).unwrap();
-    username.trim().to_string()
+  
+    print!("Enter your username: ");
+
+    std::io::stdin()
+      .read_line(&mut username)
+      .expect("Failed to read line");
+
+    return username;
   }
+
   pub fn broadcast(&self, message: &str) {
     let mut active_clients = self.clients.lock().unwrap();
-    for (username, client_stream) in active_clients.iter_mut() {
+    for (_username, client_stream) in active_clients.iter_mut() {
       if client_stream.peer_addr().unwrap() != self.stream.peer_addr().unwrap() {
         client_stream.write(message.as_bytes()).unwrap();
       }
