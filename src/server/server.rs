@@ -2,7 +2,6 @@ mod client_handler;
 
 use std::net::{TcpListener, TcpStream};
 use log::{info};
-use chrono::{Utc};
 use log4rs::config::{Deserializers, load_config_file};
 use std::thread;
 use std::sync::{Arc, Mutex};
@@ -24,17 +23,15 @@ fn main() {
       Ok(stream) => {
         let peer_addr = stream.peer_addr().unwrap();
 
-        info!("New client connected: {:?}", peer_addr);
+        info!("New client connected: {:?}. Waiting for him to set username", peer_addr);
 
-        let mut client_handler = ClientHandler::new(&stream, CLIENTS.clone());
+        let mut client_handler = ClientHandler::new(&stream.try_clone().unwrap(), CLIENTS.clone());
         let username = client_handler.get_username();
-
         CLIENTS.lock().unwrap().insert(username.clone(), stream.try_clone().unwrap());
 
-        info!("{}:{} joined at {} with username {}", peer_addr.ip(), peer_addr.port(), Utc::now(), username);
+        info!("{}:{} joined with username {}", peer_addr.ip(), peer_addr.port(), username);
 
-        client_handler.broadcast(&format!("{} joined the chat\n", username));
-
+        
         thread::spawn(move || {
           client_handler.handle();
         });

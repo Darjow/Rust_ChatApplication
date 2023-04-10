@@ -1,7 +1,7 @@
 use std::io::{BufRead, BufReader, Write};
 use std::net::TcpStream;
 use std::thread;
-use std::io::Write as IoWrite;
+
 
 fn main() {
     let mut stream = TcpStream::connect("127.0.0.1:8080").unwrap();
