@@ -29,9 +29,9 @@ fn main() {
         let username = client_handler.get_username();
         CLIENTS.lock().unwrap().insert(username.clone(), stream.try_clone().unwrap());
 
-        info!("{}:{} joined with username {}", peer_addr.ip(), peer_addr.port(), username);
+        info!("{} has set his username: {}", peer_addr, username);
 
-        
+
         thread::spawn(move || {
           client_handler.handle();
         });

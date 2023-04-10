@@ -1,4 +1,4 @@
-use std::io::{BufRead, BufReader, Write, Read};
+use std::io::{BufRead, BufReader, Write};
 use std::sync::Mutex;
 use std::collections::HashMap;
 use std::net::TcpStream;
@@ -46,7 +46,7 @@ impl ClientHandler {
   pub fn handle(&mut self) {
     let username = self.get_username();
     
-    self.send_message_to_client(format!("Hi: {}. You have joined the chat together with {} others.\n", &username, self.clients.lock().unwrap().len()).as_str());
+    self.send_message_to_client(format!("Hi: {}. You have joined the chat together with {} others.\n", &username, (self.clients.lock().unwrap().len() - 1) as i32).as_str());
     self.broadcast(&format!("{} has joined the chat\n", username));
 
     loop {
