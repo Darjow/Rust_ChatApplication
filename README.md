@@ -9,12 +9,13 @@ You will need the following installed on your system:
 - Cargo package manager (included with Rust)
 
 ## TODO List
-- Disconnect clients and test the broadcast.
-- Clients communicating with each other.
+- ~Disconnect clients and test the broadcast.~
+- ~Clients communicating with each other.~
 - Server pinging the clients every minute to see if connection is still there, if not remove from chat.
-- Connect a database to store usernames with send messages.
-- GUI? 
-- ...
+- Connect a database to store usernames with sent messages.
+- GUI? | Browser?
+- Authentication? 
+- ... 
 
 ## How to Run
 To run the chat application, follow these steps:
